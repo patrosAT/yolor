@@ -162,7 +162,7 @@ def plot_images(images, targets, paths=None, fname='images.jpg', names=None, max
                 color = colors[cls % len(colors)]
                 if names:
                     if cls < len(names):
-                        print('LEN' + len(names))
+                        print(f'LEN {len(names)}')
                         cls = names[cls]
                 print(cls)
                 if labels or conf[j] > 0.25:  # 0.25 conf thresh
