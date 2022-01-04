@@ -157,13 +157,12 @@ def plot_images(images, targets, paths=None, fname='images.jpg', names=None, max
             boxes[[0, 2]] += block_x
             boxes[[1, 3]] *= h
             boxes[[1, 3]] += block_y
-            len_names = len(names)
-            print(len_names)
             for j, box in enumerate(boxes.T):
                 cls = int(classes[j])
                 color = colors[cls % len(colors)]
                 if names:
-                    if cls < len_names:
+                    if cls < len(names):
+                        print('LEN' + len(names))
                         cls = names[cls]
                 print(cls)
                 if labels or conf[j] > 0.25:  # 0.25 conf thresh
