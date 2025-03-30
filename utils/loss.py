@@ -163,9 +163,12 @@ def build_targets(p, targets, model):
         gij = (gxy - offsets).long()
         gi, gj = gij.T  # grid xy indices
 
+        gi_long = gi.long()
+        gj_long = gj.long()
+
         # Append
-        #indices.append((b, a, gj, gi))  # image, anchor, grid indices
-        indices.append((b, a, gj.clamp_(0, gain[3] - 1), gi.clamp_(0, gain[2] - 1)))  # image, anchor, grid indices
+        #indices.append((b, a, gj_long, gi_long))  # image, anchor, grid indices
+        indices.append((b, a, gj_long.clamp_(0, gain[3] - 1), gj_long.clamp_(0, gain[2] - 1)))  # image, anchor, grid indices
         tbox.append(torch.cat((gxy - gij, gwh), 1))  # box
         anch.append(anchors[a])  # anchors
         tcls.append(c)  # class
