@@ -144,6 +144,7 @@ def build_targets(p, targets, model):
             at = torch.arange(na).view(na, 1).repeat(1, nt)  # anchor tensor, same as .repeat_interleave(nt)
             r = t[None, :, 4:6] / anchors[:, None]  # wh ratio
             j = torch.max(r, 1. / r).max(2)[0] < model.hyp['anchor_t']  # compare
+            at = at.to(j.device)
             # j = wh_iou(anchors, t[:, 4:6]) > model.hyp['iou_t']  # iou(3,n) = wh_iou(anchors(3,2), gwh(n,2))
             a, t = at[j], t.repeat(na, 1, 1)[j]  # filter
 
